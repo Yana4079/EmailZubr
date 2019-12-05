@@ -1,0 +1,101 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="foundation-for-emails-template">Foundation for Emails Template</h1>
+<p><a href="https://david-dm.org/zurb/foundation-emails-template#info=devDependencies"><img src="https://david-dm.org/zurb/foundation-emails-template/dev-status.svg" alt="devDependency Status"></a></p>
+<p><strong>Please open all issues with this template on the main <a href="http://github.com/zurb/foundation-emails/issues">Foundation for Emails</a> repo.</strong></p>
+<p>This is the official starter project for <a href="http://foundation.zurb.com/emails">Foundation for Emails</a>, a framework for creating responsive HTML devices that work in any email client. It has a Gulp-powered build system with these features:</p>
+<ul>
+<li>Handlebars HTML templates with <a href="http://github.com/zurb/panini">Panini</a></li>
+<li>Simplified HTML email syntax with <a href="http://github.com/zurb/inky">Inky</a></li>
+<li>Sass compilation</li>
+<li>Image compression</li>
+<li>Built-in BrowserSync server</li>
+<li>Full email inlining process</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>To use this template, your computer needs <a href="https://nodejs.org/en/">Node.js</a> 0.12 or greater. The template can be installed with the Foundation CLI, or downloaded and set up manually.</p>
+<h3 id="using-the-cli">Using the CLI</h3>
+<p>Install the Foundation CLI with this command:</p>
+<pre><code class="lang-bash">npm install foundation-cli --global
+</code></pre>
+<p>Use this command to set up a blank Foundation for Emails project:</p>
+<pre><code class="lang-bash">foundation new --framework emails
+</code></pre>
+<p>The CLI will prompt you to give your project a name. The template will be downloaded into a folder with this name.</p>
+<h3 id="manual-setup">Manual Setup</h3>
+<p>To manually set up the template, first download it with Git:</p>
+<pre><code class="lang-bash">git clone https://github.com/zurb/foundation-emails-template projectname
+</code></pre>
+<p>Then open the folder in your command line, and install the needed dependencies:</p>
+<pre><code class="lang-bash">cd projectname
+npm install
+</code></pre>
+<h2 id="build-commands">Build Commands</h2>
+<p>Run <code>npm start</code> to kick off the build process. A new browser tab will open with a server pointing to your project files.</p>
+<p>Run <code>npm run build</code> to inline your CSS into your HTML along with the rest of the build process.</p>
+<p>Run <code>npm run litmus</code> to build as above, then submit to litmus for testing. <em>AWS S3 Account details required (config.json)</em></p>
+<p>Run <code>npm run mail</code> to build as above, then send to specified email address for testing. <em>SMTP server details required (config.json)</em></p>
+<p>Run <code>npm run zip</code> to build as above, then zip HTML and images for easy deployment to email marketing services. </p>
+<h3 id="speeding-up-your-build">Speeding Up Your Build</h3>
+<p>If you create a lot of emails, your build can start to slow down, as each build rebuilds all of the emails in the
+repository. A simple way to keep it fast is to archive emails you no longer need by moving the pages into <code>src/pages/archive</code>.
+You can also move images that are no longer needed into <code>src/assets/img/archive</code>. The build will ignore pages and images that
+are inside the archive folder.</p>
+<h2 id="litmus-tests-config-json-">Litmus Tests (config.json)</h2>
+<p>Testing in Litmus requires the images to be hosted publicly. The provided gulp task handles this by automating hosting to an AWS S3 account. Provide your Litmus and AWS S3 account details in the <code>example.config.json</code> and then rename to <code>config.json</code>. Litmus config, and <code>aws.url</code> are required, however if you follow the <a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html">aws-sdk suggestions</a> you don&#39;t need to supply the AWS credentials into this JSON.</p>
+<pre><code class="lang-json">{
+  &quot;aws&quot;: {
+    &quot;region&quot;: &quot;us-east-1&quot;,
+    &quot;accessKeyId&quot;: &quot;YOUR_ACCOUNT_KEY&quot;,
+    &quot;secretAccessKey&quot;: &quot;YOUR_ACCOUNT_SECRET&quot;,
+    &quot;params&quot;: {
+        &quot;Bucket&quot;: &quot;elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE&quot;
+    },
+    &quot;url&quot;: &quot;https://s3.amazonaws.com/elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE&quot;
+  },
+  &quot;litmus&quot;: {
+    &quot;username&quot;: &quot;YOUR_LITMUS@EMAIL.com&quot;,
+    &quot;password&quot;: &quot;YOUR_ACCOUNT_PASSWORD&quot;,
+    &quot;url&quot;: &quot;https://YOUR_ACCOUNT.litmus.com&quot;,
+    &quot;applications&quot;: [&quot;ol2003&quot;,&quot;ol2007&quot;,&quot;ol2010&quot;,&quot;ol2011&quot;,&quot;ol2013&quot;,&quot;chromegmailnew&quot;,&quot;chromeyahoo&quot;,&quot;appmail9&quot;,&quot;iphone5s&quot;,&quot;ipad&quot;,&quot;android4&quot;,&quot;androidgmailapp&quot;]
+  }
+}
+</code></pre>
+<h2 id="manual-email-tests-config-json-">Manual email tests (config.json)</h2>
+<p>Similar to the Litmus tests, you can have the emails sent to a specified email address. Just like with the Litmus tests, you will need to provide AWS S3 account details in <code>config.json</code>. You will also need to specify to details of an SMTP server. The email address to send to emails to can either by configured in the <code>package.json</code> file or added as a parameter like so: <code>npm run mail -- --to=&quot;example.com&quot;</code></p>
+<pre><code class="lang-json">{
+  &quot;aws&quot;: {
+    &quot;region&quot;: &quot;us-east-1&quot;,
+    &quot;accessKeyId&quot;: &quot;YOUR_ACCOUNT_KEY&quot;,
+    &quot;secretAccessKey&quot;: &quot;YOUR_ACCOUNT_SECRET&quot;,
+    &quot;params&quot;: {
+        &quot;Bucket&quot;: &quot;elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE&quot;
+    },
+    &quot;url&quot;: &quot;https://s3.amazonaws.com/elasticbeanstalk-us-east-1-THIS_IS_JUST_AN_EXAMPLE&quot;
+  },
+  &quot;mail&quot;: {
+    &quot;to&quot;: [
+      &quot;example@domain.com&quot;
+    ],
+    &quot;from&quot;: &quot;Company name &lt;info@company.com&quot;,
+    &quot;smtp&quot;: {
+      &quot;auth&quot;: {
+        &quot;user&quot;: &quot;example@domain.com&quot;,
+        &quot;pass&quot;: &quot;12345678&quot;
+      },
+      &quot;host&quot;: &quot;smtp.domain.com&quot;,
+      &quot;secureConnection&quot;: true,
+      &quot;port&quot;: 465
+    }
+  }
+}
+</code></pre>
+<p>For a full list of Litmus&#39; supported test clients(applications) see their <a href="https://litmus.com/emails/clients.xml">client list</a>.</p>
+<p><strong>Caution:</strong> AWS Service Fees will result, however, are usually very low do to minimal traffic. Use at your own discretion.</p>
+
+      </body>
+    </html>
