@@ -22,13 +22,39 @@ html,
 .container.header {
   background: #f3f3f3;
 }
-
+.BgBegin {
+  background-color: #EEF4F6;
+}
+.letter {
+ padding-left: 75%;
+ @media only screen and (max-width: #{$global-breakpoint}) {
+  padding-left: 0;
+}
+ }
 .items {
   line-height: 2;
   font-size: 18px !important;
   margin-bottom: 0 !important;
 }
-
+.columnImg,
+.columnText {
+  padding-bottom:40px;
+   padding-top:40px; 
+   margin-bottom:0;
+   @media only screen and (max-width: #{$global-breakpoint}) {
+    padding-bottom:0;
+  }
+}
+.columnImg {
+  @media only screen and (max-width: #{$global-breakpoint}) {
+    padding-top:10px; 
+  }
+}
+.columnText {
+  @media only screen and (max-width: #{$global-breakpoint}) {
+    padding-top:0; 
+  }
+}
 
 .body-drip {
   border-top: 8px solid #663399;
